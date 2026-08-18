@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Ulangan Harian - SMAN 1 Wongsorejo</title>
+    <!-- Import Font Poppins yang sangat Gen Z / Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      /* --- ANIMASI BACKGROUND (Vibrant Ambient Light) --- */
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      body { 
+        font-family: 'Poppins', sans-serif; 
+        margin: 0; 
+        padding: 20px; 
+        min-height: 100vh;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        /* Gradasi warna kekinian ala TikTok/Instagram (Purple to Pink to Orange) */
+        background: linear-gradient(-45deg, #4158D0, #C850C0, #FFCC70, #8A2387);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+      }
+
+      /* --- KARTU GLASSMORPHISM MODERN --- */
+      .card { 
+        background: rgba(255, 255, 255, 0.85); 
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 40px 30px; 
+        border-radius: 24px; /* Sudut lebih membulat */
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.3); 
+        width: 100%; 
+        max-width: 420px; 
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* --- LOGO MELAYANG (Floating Animation) --- */
+      .logo {
+        width: 270px;
+        display: block;
+        margin: 0 auto 20px auto;
+        animation: floating 3s ease-in-out infinite;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+      }
+
+      @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+
+      /* --- TRANSISI HALAMAN --- */
+      .page { display: none; }
+      .active { 
+        display: block; 
+        animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Efek memantul ringan */
+      }
+
+      @keyframes popIn {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      /* --- TYPOGRAPHY KEKINIAN --- */
+      h2 { 
+        text-align: center; 
+        margin-top: 0; 
+        margin-bottom: 25px; 
+        font-weight: 800; 
+        line-height: 1.3; 
+        /* Teks Bergradasi */
+        background: linear-gradient(to right, #8A2387, #E94057, #F27121);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 22px;
+      }
+      
+      h3 { 
+        color: #C850C0; 
+        border-bottom: 3px dashed rgba(200, 80, 192, 0.3); 
+        padding-bottom: 10px; 
+        margin-bottom: 20px; 
+        font-size: 18px;
+        font-weight: 700;
+      }
+      
+      label { 
+        font-weight: 600; 
+        font-size: 13px; 
+        color: #444; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      /* --- INPUT & SELECT ELEGAN --- */
+      input[type="text"], select { 
+        width: 100%; 
+        padding: 15px; 
+        margin: 5px 0 20px 0; 
+        border: 2px solid transparent; 
+        border-radius: 14px; 
+        box-sizing: border-box; 
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+      }
+      
+      input[type="text"]:focus, select:focus {
+        border-color: #C850C0;
+        outline: none;
+        background-color: #fff;
+        box-shadow: 0 0 0 4px rgba(200, 80, 192, 0.2);
+        transform: translateY(-2px);
+      }
+
+      /* Khusus Input File biar lebih estetik */
+      input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        margin: 5px 0 20px 0;
+        background: rgba(255, 255, 255, 0.6);
+        border: 2px dashed #C850C0;
+        border-radius: 14px;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+      }
+
+      /* --- TOMBOL GRADASI (Interactive) --- */
+      button { 
+        width: 100%; 
+        padding: 15px; 
+        margin: 10px 0; 
+        border: none; 
+        border-radius: 14px; 
+        font-weight: 700; 
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer; 
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        background: linear-gradient(135deg, #FF416C, #FF4B2B); 
+        color: white; 
+        box-shadow: 0 8px 20px rgba(255, 65, 108, 0.3);
+      }
+      button:hover { 
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 25px rgba(255, 65, 108, 0.5);
+      }
+      button:active {
+        transform: translateY(0);
+      }
+      
+      .btn-secondary { 
+        background: linear-gradient(135deg, #8e9eab, #eef2f3);
+        color: #333;
+        box-shadow: 0 8px 20px rgba(142, 158, 171, 0.2);
+      }
+      .btn-secondary:hover { 
+        background: linear-gradient(135deg, #7b8a96, #dfe4e6);
+        box-shadow: 0 12px 25px rgba(142, 158, 171, 0.3);
+      }
+
+      /* --- TEKS PESAN --- */
+      .msg { font-size: 14px; text-align: center; font-weight: 600; margin-top: 10px; }
+      .error { color: #FF416C; }
+      .success { color: #00b09b; }
+
+      /* --- COPYRIGHT --- */
+      .copyright {
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        margin-top: 30px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <!-- Logo Ditambahkan Disini -->
+      <img src="https://i.ibb.co.com/zTHpGJ3W/20260513-105333-0000.png" alt="Logo SMAN 1 Wongsorejo" class="logo">
+      
+      <h2>Pengumpulan Hasil<br>Ulangan Harian Bersama<br>SMAN 1 Wongsorejo</h2>
+
+      <!-- Halaman 1: Login Token -->
+      <div id="page1" class="page active">
+        <h3>1. Login Siswa</h3>
+        <label>Masukan Token:</label>
+        <input type="text" id="token" placeholder="Contoh: SMANJO123" required autocomplete="off">
+        <button onclick="cekToken()">Masuk Sekarang</button>
+        <p id="msg1" class="msg error"></p>
+      </div>
+
+      <!-- Halaman 2: Konfirmasi & Pilih Kelas/Mapel TETAP ADA -->
+      <div id="page2" class="page">
+        <h3>2. Konfirmasi Identitas</h3>
+        <p style="text-align: center; font-size: 16px; font-weight: 500; color: #555;">Selamat datang Bro & Sis<br><strong id="namaSiswa" style="color:#C850C0; font-size: 22px; font-weight: 800; text-transform: uppercase;"></strong></p>
+        
+        <label>Pilih Kelas:</label>
+        <select id="kelas">
+          <option value="">-- Pilih Kelas --</option>
+          <option value="X.1">X.1</option>
+          <option value="X.2">X.2</option>
+          <option value="X.3">X.3</option>
+          <option value="X.4">X.4</option>
+          <option value="XI.1">XI.1</option>
+          <option value="XI.2">XI.2</option>
+          <option value="XI.3">XI.3</option>
+          <option value="XI.4">XI.4</option>
+          <option value="XII.1">XII.1</option>
+          <option value="XII.2">XII.2</option>
+          <option value="XII.3">XII.3</option>
+          <option value="XII.4">XII.4</option>
+        </select>
+        
+        <label>Pilih Mata Pelajaran:</label>
+        <select id="mapel">
+          <option value="">-- Pilih Mapel --</option>
+          <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+          <option value="B. Inggris">B. Inggris</option>
+          <option value="Matematika Umum">Matematika Umum</option>
+          <option value="Pendidikan Pancasila">Pendidikan Pancasila</option>
+          <option value="Pendidikan Agama dan BP">Pendidikan Agama dan BP</option>
+          <option value="Sejarah">Sejarah</option>
+          <option value="PKWU">PKWU</option>
+          <option value="Mulok Kerajinan">Mulok Kerajinan</option>
+          <option value="Kimia">Kimia</option>
+          <option value="Fisika">Fisika</option>
+          <option value="Biologi">Biologi</option>
+          <option value="Sosiologi">Sosiologi</option>
+          <option value="Ekonomi">Ekonomi</option>
+          <option value="Geografi">Geografi</option>
+          <option value="Sejarah TL">Sejarah TL</option>
+          <option value="Matematika TL">Matematika TL</option>
+          <option value="Seni Budaya">Seni Budaya</option>
+          <option value="PJOK">PJOK</option>
+          <option value="Informatika">Informatika</option>
+        </select>
+
+        <button onclick="goToPage3()">Lanjut Upload File</button>
+        <button class="btn-secondary" onclick="goToPage(1)">Kembali</button>
+        <p id="msg2" class="msg error"></p>
+      </div>
+
+      <!-- Halaman 3: Upload File -->
+      <div id="page3" class="page">
+        <h3>3. Upload Hasil Ujian</h3>
+        <label>Pilih File (Foto/PDF/Doc):</label>
+        <input type="file" id="fileUpload" required>
+        <button id="btnSubmit" onclick="uploadFile()">Kirim Hasil Ujian</button>
+        <button id="btnBack" class="btn-secondary" onclick="goToPage(2)">Kembali</button>
+        <p id="msg3" class="msg"></p>
+      </div>
+
+      <!-- Copyright Section -->
+      <div class="copyright">
+        &copy; <script>document.write(new Date().getFullYear())</script> SMAN 1 Wongsorejo. Powered By Very Andika.
+      </div>
+    </div>
+
+    <script>
+      // API_URL TIDAK DIUBAH SAMA SEKALI
+      const API_URL = "https://script.google.com/macros/s/AKfycbxP1UqnqGxCtf_KYh-feEslhNlep-J6PJ0Un54PC1KvBAmAQupp91HwKkXR0AmPsyO2/exec"; 
+      let studentData = {};
+
+      function goToPage(pageNumber) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page' + pageNumber).classList.add('active');
+      }
+
+      function cekToken() {
+        const token = document.getElementById('token').value.trim();
+        if(!token) return;
+        
+        document.getElementById('msg1').innerText = "Memeriksa token...";
+        
+        fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({ action: "validateToken", token: token })
+        })
+        .then(res => res.json())
+        .then(res => {
+          if(res.valid) {
+            studentData.token = token;
+            studentData.nama = res.nama;
+            document.getElementById('namaSiswa').innerText = res.nama;
+            document.getElementById('msg1').innerText = "";
+            goToPage(2);
+          } else {
+            document.getElementById('msg1').innerText = "Token tidak ditemukan!";
+          }
+        }).catch(err => {
+          document.getElementById('msg1').innerText = "Terjadi kesalahan koneksi internet.";
+        });
+      }
+
+      function goToPage3() {
+        studentData.kelas = document.getElementById('kelas').value;
+        studentData.mapel = document.getElementById('mapel').value;
+        
+        if(!studentData.kelas || !studentData.mapel) {
+          document.getElementById('msg2').innerText = "Harap pilih Kelas dan Mata Pelajaran terlebih dahulu!";
+          return;
+        }
+        document.getElementById('msg2').innerText = "";
+        goToPage(3);
+      }
+
+      function uploadFile() {
+        const fileInput = document.getElementById('fileUpload');
+        if(fileInput.files.length === 0) {
+          document.getElementById('msg3').innerText = "Pilih file terlebih dahulu!";
+          document.getElementById('msg3').className = "msg error";
+          return;
+        }
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        document.getElementById('btnSubmit').disabled = true;
+        document.getElementById('btnSubmit').innerText = "Mengupload...";
+        document.getElementById('btnBack').style.display = "none";
+        document.getElementById('msg3').innerText = "Ngereng pasabbar sareng ja' notop kaca paneka. Data ekirim....";
+        document.getElementById('msg3').style.color = "#C850C0";
+
+        const newFileName = studentData.nama + "_" + file.name;
+
+        reader.onload = function(e) {
+          const base64Data = e.target.result.split(',')[1];
+          const formData = {
+            token: studentData.token,
+            nama: studentData.nama,
+            kelas: studentData.kelas,
+            mapel: studentData.mapel,
+            fileName: newFileName,
+            mimeType: file.type,
+            fileData: base64Data
+          };
+
+          fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify({ action: "upload", data: formData })
+          })
+          .then(res => res.json())
+          .then(res => {
+            if(res.success) {
+              document.getElementById('page3').innerHTML = `
+                <div style="text-align:center; padding: 20px 0; animation: popIn 0.5s forwards;">
+                  <h3 class="success" style="border: none; font-size: 28px; margin-bottom: 5px;">Berhasil!</h3>
+                  <p style="font-size: 15px; color: #555;">Matur Sakalangkong <strong style="color: #C850C0;">${studentData.nama}</strong>,<br>Hasel ujianna bekna la esimpen kalaban aman.</p>
+                  <button onclick="location.reload()" style="margin-top: 20px;">Upload File Lain</button>
+                </div>`;
+            } else {
+              document.getElementById('msg3').innerText = "Gagal upload: " + res.error;
+              document.getElementById('msg3').className = "msg error";
+              resetUploadState();
+            }
+          }).catch(err => {
+            document.getElementById('msg3').innerText = "Terjadi kesalahan jaringan. Coba lagi!";
+            document.getElementById('msg3').className = "msg error";
+            resetUploadState();
+          });
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function resetUploadState() {
+        document.getElementById('btnSubmit').disabled = false;
+        document.getElementById('btnSubmit').innerText = "Coba Lagi";
+        document.getElementById('btnBack').style.display = "block";
+      }
+    </script>
+  </body>
+</html>
